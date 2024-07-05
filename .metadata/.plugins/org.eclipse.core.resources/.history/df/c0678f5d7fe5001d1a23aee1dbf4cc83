@@ -1,0 +1,26 @@
+package EmpControler;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import EmployeeDto.Employee;
+
+@Controller
+public class EmpController {
+
+	@RequestMapping("/load")
+	public ModelAndView load() {
+		ModelAndView andView=new ModelAndView("save.jsp");
+		andView.addObject("new",new Employee());
+		return andView;
+	}
+	@RequestMapping("/saveemp")
+	public ModelAndView saveemp(@ModelAttribute Employee employee) {
+		ModelAndView andView=new ModelAndView("save.jsp");
+		andView.addObject("save","/display");
+		return andView;
+	}
+	
+}

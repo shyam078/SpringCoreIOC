@@ -1,0 +1,13 @@
+package EmployeeDto;
+
+import org.hibernate.annotations.Entity;
+
+
+public class Employee {
+
+	private int id;
+	private String name;
+	private String email;
+	private String password;
+	
+}

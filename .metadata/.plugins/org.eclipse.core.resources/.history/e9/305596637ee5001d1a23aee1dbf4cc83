@@ -1,0 +1,42 @@
+package EmployeeDao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+import EmployeeDto.Employee;
+
+public class EmpDao {
+
+	static EntityManagerFactory factory=Persistence.createEntityManagerFactory("");
+	static EntityManager manager=factory.createEntityManager();
+	static EntityTransaction transaction=manager.getTransaction();
+	public Employee SaveEmp(Employee employee) {
+		transaction.begin();
+		manager.persist(employee);
+		transaction.commit();
+		return employee;
+	}
+	public void delete(int id) {
+		Employee e=manager.find(Employee.class, id);
+		if(e!=null) {
+			manager.remove(e);
+		}
+		else {
+			System.out.println("check");
+		}
+	}
+	public Employee login(Employee employee) {
+		Employee email=manager.find(Employee.class, employee.getEmail());
+		Employee password=manager.find(Employee.class, employee.getPassword());
+		if(email!=null&&password!=null) {
+			return employee;
+		}
+		else {
+			System.out.println("check the condition");
+		}
+		return employee;
+		
+	}
+}

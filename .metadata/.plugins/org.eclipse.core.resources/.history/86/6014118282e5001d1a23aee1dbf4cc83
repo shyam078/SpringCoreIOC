@@ -1,0 +1,48 @@
+package EmpControler;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import EmployeeDao.EmpDao;
+import EmployeeDto.Employee;
+import antlr.collections.List;
+
+@Controller
+public class EmpController {
+
+	@Autowired
+	EmpDao dao;
+	
+	@Autowired
+	Employee employee;
+	
+	@RequestMapping("/load")
+	public ModelAndView load() {
+		ModelAndView andView=new ModelAndView("save.jsp");
+		andView.addObject("new",new Employee());
+		return andView;
+	}
+	@RequestMapping("/saveemp")
+	public ModelAndView saveemp(@ModelAttribute Employee employee) {
+		ModelAndView andView=new ModelAndView("/display");
+		andView.addObject("save",dao.SaveEmp(employee));
+		return andView;
+	}
+	@RequestMapping("/login")
+	public ModelAndView login(@RequestParam String email,String password) {
+		ModelAndView andView=new ModelAndView("/display");
+		andView.addObject("login",dao.login(employee));
+		return andView;
+	}
+	@RequestMapping("/login")
+	public ModelAndView getbyid(@RequestParam String email,String password) {
+		ModelAndView andView=new ModelAndView("/display");
+		andView.addObject("login",dao.login(employee));
+		return andView;
+	}
+	
+}
